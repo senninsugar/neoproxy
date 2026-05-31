@@ -5,21 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NeoProxy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #06060e;
-      --surface: #0e0e1a;
-      --surface2: #16162a;
-      --border: #1e1e36;
-      --border2: #2a2a48;
-      --accent: #7c3aed;
-      --accent-glow: rgba(124,58,237,0.4);
-      --accent2: #06b6d4;
-      --accent2-glow: rgba(6,182,212,0.3);
-      --text: #e8e8f5;
-      --muted: #5a5a7a;
-      --muted2: #3a3a58;
+      --bg: #0b0b0c;
+      --surface: #131316;
+      --surface2: #1c1c21;
+      --border: #232329;
+      --border2: #2e2e38;
+      --accent: #ffffff;
+      --text: #ededf0;
+      --muted: #707080;
+      --muted2: #484854;
       --success: #10b981;
       --error: #f43f5e;
     }
@@ -29,178 +26,47 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Animated background grid */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(124,58,237,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(124,58,237,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Glow orbs */
-    body::after {
-      content: '';
-      position: fixed;
-      top: -200px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 400px;
-      background: radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .container {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ===== HEADER ===== */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 32px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(6,6,14,0.8);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .logo-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo-icon {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-
-    .logo-text {
-      font-size: 1.3rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #a78bfa, var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .header-badge {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 2px;
-      border: 1px solid var(--border2);
-      padding: 4px 10px;
-      border-radius: 20px;
-    }
-
-    /* ===== MAIN AREA ===== */
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 60px 24px 40px;
-    }
-
-    .hero {
+      max-width: 600px;
+      width: 100%;
+      padding: 0 24px;
       text-align: center;
-      margin-bottom: 48px;
     }
 
-    .hero-title {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 800;
-      letter-spacing: -3px;
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-
-    .hero-title span {
-      display: block;
-    }
-
-    .hero-title .line1 {
+    .title-label {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
       color: var(--text);
-    }
-
-    .hero-title .line2 {
-      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent));
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shimmer 4s linear infinite;
-    }
-
-    @keyframes shimmer {
-      to { background-position: 200% center; }
-    }
-
-    .hero-sub {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--muted);
-      letter-spacing: 3px;
+      margin-bottom: 24px;
     }
 
     /* ===== SEARCH PANEL ===== */
     .search-panel {
       width: 100%;
-      max-width: 680px;
-      margin-bottom: 32px;
+      margin-bottom: 12px;
     }
 
     .search-wrapper {
       display: flex;
       background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: 14px;
+      border: 1px solid var(--border);
+      border-radius: 99px;
       overflow: hidden;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      box-shadow: 0 0 0 0 var(--accent-glow);
+      transition: border-color 0.2s;
+      padding: 4px;
     }
 
     .search-wrapper:focus-within {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent-glow);
-    }
-
-    .search-protocol {
-      display: flex;
-      align-items: center;
-      padding: 0 16px;
-      background: var(--surface2);
-      border-right: 1px solid var(--border2);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--accent2);
-      user-select: none;
-      white-space: nowrap;
+      border-color: var(--muted);
     }
 
     #urlInput {
@@ -209,42 +75,41 @@
       border: none;
       outline: none;
       color: var(--text);
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 0.9rem;
-      padding: 18px 20px;
+      padding: 12px 24px;
       min-width: 0;
     }
 
-    #urlInput::placeholder { color: var(--muted); }
+    #urlInput::placeholder { color: var(--muted2); }
 
     #goBtn {
-      background: linear-gradient(135deg, var(--accent), #6d28d9);
+      background: var(--accent);
       border: none;
-      color: white;
-      padding: 18px 28px;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
+      color: var(--bg);
+      padding: 0 28px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
       cursor: pointer;
-      transition: all 0.2s;
-      letter-spacing: 1px;
-      white-space: nowrap;
+      transition: opacity 0.2s;
+      border-radius: 99px;
     }
 
     #goBtn:hover {
-      background: linear-gradient(135deg, #8b5cf6, var(--accent));
-      padding-right: 36px;
+      opacity: 0.9;
     }
 
     /* Status bar */
     .status-bar {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       margin-top: 12px;
       height: 20px;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
     }
 
     .status-dot {
@@ -257,264 +122,32 @@
 
     .status-text { color: var(--muted); transition: color 0.3s; }
 
-    .status-bar.loading .status-dot { background: var(--accent2); animation: pulse 1s infinite; }
-    .status-bar.loading .status-text { color: var(--accent2); }
+    .status-bar.loading .status-dot { background: var(--text); animation: pulse 1s infinite; }
+    .status-bar.loading .status-text { color: var(--text); }
     .status-bar.ok .status-dot { background: var(--success); }
     .status-bar.ok .status-text { color: var(--success); }
     .status-bar.err .status-dot { background: var(--error); }
     .status-bar.err .status-text { color: var(--error); }
 
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-
-    /* ===== SHORTCUTS ===== */
-    .shortcuts-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted2);
-      letter-spacing: 3px;
-      margin-bottom: 12px;
-      align-self: flex-start;
-      width: 100%;
-      max-width: 680px;
-    }
-
-    .shortcuts {
-      display: flex;
-      gap: 8px;
-      width: 100%;
-      max-width: 680px;
-      flex-wrap: wrap;
-    }
-
-    .shortcut {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 0.8rem;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.18s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .shortcut:hover {
-      border-color: var(--border2);
-      color: var(--text);
-      background: var(--surface2);
-      transform: translateY(-1px);
-    }
-
-    .shortcut-icon { font-size: 14px; }
-
-    /* ===== PROXY FRAME ===== */
-    .frame-wrapper {
-      display: none;
-      width: 100%;
-      max-width: 1200px;
-      margin-top: 40px;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .frame-toolbar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--surface2);
-      border: 1px solid var(--border2);
-      border-bottom: none;
-      border-radius: 12px 12px 0 0;
-      padding: 10px 16px;
-    }
-
-    .frame-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .frame-dot {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .frame-dot.close { background: #ff5f57; }
-    .frame-dot.min { background: #ffbd2e; }
-    .frame-dot.max { background: #28c840; }
-
-    .frame-url-display {
-      flex: 1;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 6px 12px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    #proxyFrame {
-      width: 100%;
-      height: 75vh;
-      border: 1px solid var(--border2);
-      border-radius: 0 0 12px 12px;
-      background: white;
-    }
-
-    /* ===== FEATURES ===== */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      width: 100%;
-      max-width: 680px;
-      margin-top: 48px;
-    }
-
-    .feature {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-    }
-
-    .feature-icon {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-    }
-
-    .feature-title {
-      font-weight: 700;
-      font-size: 0.85rem;
-      margin-bottom: 4px;
-      color: var(--text);
-    }
-
-    .feature-desc {
-      font-size: 0.75rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 24px;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted2);
-      border-top: 1px solid var(--border);
-      letter-spacing: 1px;
-    }
   </style>
 </head>
 <body>
 <div class="container">
 
-  <header>
-    <div class="logo-group">
-      <div class="logo-icon">🌐</div>
-      <div class="logo-text">NeoProxy</div>
-    </div>
-    <div class="header-badge">SW · URL-REWRITE · v1.0</div>
-  </header>
+  <div class="title-label">sasutyproxy</div>
 
-  <main>
-    <div class="hero">
-      <div class="hero-title">
-        <span class="line1">Browse</span>
-        <span class="line2">Unrestricted</span>
-      </div>
-      <div class="hero-sub">ULTRAVIOLET-CLASS · URL REWRITING ENGINE · BUILT FROM SCRATCH</div>
+  <div class="search-panel">
+    <div class="search-wrapper">
+      <input id="urlInput" type="text" placeholder="URLを入力、またはキーワード検索..." autocomplete="off" spellcheck="false">
+      <button id="goBtn" onclick="navigate()">検索</button>
     </div>
-
-    <div class="search-panel">
-      <div class="search-wrapper">
-        <div class="search-protocol">https://</div>
-        <input id="urlInput" type="text" placeholder="example.com を入力..." autocomplete="off" spellcheck="false">
-        <button id="goBtn" onclick="navigate()">→ GO</button>
-      </div>
-      <div class="status-bar" id="statusBar">
-        <div class="status-dot"></div>
-        <span class="status-text" id="statusText">準備完了</span>
-      </div>
+    <div class="status-bar" id="statusBar">
+      <div class="status-dot"></div>
+      <span class="status-text" id="statusText"></span>
     </div>
+  </div>
 
-    <div class="shortcuts-label">QUICK ACCESS</div>
-    <div class="shortcuts">
-      <div class="shortcut" onclick="quick('https://www.google.com')">
-        <span class="shortcut-icon">🔍</span> Google
-      </div>
-      <div class="shortcut" onclick="quick('https://www.wikipedia.org')">
-        <span class="shortcut-icon">📖</span> Wikipedia
-      </div>
-      <div class="shortcut" onclick="quick('https://www.reddit.com')">
-        <span class="shortcut-icon">💬</span> Reddit
-      </div>
-      <div class="shortcut" onclick="quick('https://news.ycombinator.com')">
-        <span class="shortcut-icon">🗞️</span> Hacker News
-      </div>
-      <div class="shortcut" onclick="quick('https://github.com')">
-        <span class="shortcut-icon">🐙</span> GitHub
-      </div>
-      <div class="shortcut" onclick="quick('https://www.youtube.com')">
-        <span class="shortcut-icon">▶️</span> YouTube
-      </div>
-      <div class="shortcut" onclick="quick('https://developer.mozilla.org')">
-        <span class="shortcut-icon">📘</span> MDN
-      </div>
-      <div class="shortcut" onclick="quick('https://www.duckduckgo.com')">
-        <span class="shortcut-icon">🦆</span> DuckDuckGo
-      </div>
-    </div>
-
-    <!-- Frame viewer -->
-    <div class="frame-wrapper" id="frameWrapper">
-      <div class="frame-toolbar">
-        <div class="frame-dots">
-          <div class="frame-dot close" onclick="closeFrame()"></div>
-          <div class="frame-dot min"></div>
-          <div class="frame-dot max"></div>
-        </div>
-        <div class="frame-url-display" id="frameURL">about:blank</div>
-      </div>
-      <iframe id="proxyFrame"
-        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-top-navigation-by-user-activation"
-        referrerpolicy="no-referrer"
-      ></iframe>
-    </div>
-
-    <div class="features">
-      <div class="feature">
-        <div class="feature-icon">🔐</div>
-        <div class="feature-title">URL エンコード</div>
-        <div class="feature-desc">Base64 + URLエンコードで全URLを難読化</div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🔄</div>
-        <div class="feature-title">HTML/CSS 書き換え</div>
-        <div class="feature-desc">全リンク・画像・フォームを自動リライト</div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🛡️</div>
-        <div class="feature-title">CSP バイパス</div>
-        <div class="feature-desc">X-Frame-Options / CSP ヘッダーを除去</div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">⚡</div>
-        <div class="feature-title">JS インジェクション</div>
-        <div class="feature-desc">fetch/XHR を自動ラップしてプロキシ経由に</div>
-      </div>
-    </div>
-  </main>
-
-  <footer>NEOPROXY · BUILT FROM SCRATCH · ULTRAVIOLET-CLASS ARCHITECTURE</footer>
 </div>
 
 <script>
@@ -534,40 +167,234 @@
     document.getElementById('statusText').textContent = text;
   }
 
+  // URL判定パターン
+  function isURL(str) {
+    if (/^https?:\/\//.test(str)) return true;
+    const pattern = /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}(:\d+)?(\/.*)?$/i;
+    return pattern.test(str);
+  }
+
   function navigate() {
-    let url = document.getElementById('urlInput').value.trim();
-    if (!url) return;
-    if (!/^https?:\/\//.test(url)) url = 'https://' + url;
+    let input = document.getElementById('urlInput').value.trim();
+    if (!input) return;
+
+    let url = input;
+    if (!isURL(url)) {
+      url = 'https://duckduckgo.com/?q=' + encodeURIComponent(input);
+    } else {
+      if (!/^https?:\/\//.test(url)) {
+        url = 'https://' + url;
+      }
+    }
 
     const encoded = encode(url);
     if (!encoded) return setStatus('err', 'URLエンコードエラー');
 
     const proxied = PREFIX + encoded;
-    const frame = document.getElementById('proxyFrame');
-    const wrapper = document.getElementById('frameWrapper');
-    const frameURL = document.getElementById('frameURL');
-
-    wrapper.style.display = 'flex';
-    frameURL.textContent = url;
     setStatus('loading', '接続中...');
 
-    frame.onload = () => setStatus('ok', '読み込み完了 ✓');
-    frame.onerror = () => setStatus('err', '読み込みエラー ✗');
-    frame.src = proxied;
+    try {
+      const win = window.open('about:blank', '_blank');
+      if (win) {
+        setStatus('ok', '新しいタブで開きました ✓');
+        
+        win.document.write(`
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>sasutyproxy Viewer</title>
+            <style>
+              body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #0b0b0c; font-family: sans-serif; color: #ededf0; }
+              
+              /* タブバー構造 */
+              .tab-bar { display: flex; align-items: center; background: #131316; border-bottom: 1px solid #232329; padding: 4px 8px 0 8px; gap: 4px; overflow-x: auto; }
+              .tab { display: flex; align-items: center; background: #1c1c21; border: 1px solid #232329; border-bottom: none; padding: 6px 12px; font-size: 12px; border-radius: 6px 6px 0 0; cursor: pointer; max-width: 150px; position: relative; }
+              .tab.active { background: #232329; color: #fff; font-weight: bold; }
+              .tab-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 16px; }
+              .tab-close { position: absolute; right: 6px; cursor: pointer; color: #707080; font-weight: normal; }
+              .tab-close:hover { color: #f43f5e; }
+              .add-tab-btn { background: none; border: none; color: #ededf0; font-size: 16px; cursor: pointer; padding: 4px 8px; margin-bottom: 4px; }
+              
+              /* アドレスバー構造 */
+              .nav-bar { display: flex; align-items: center; background: #131316; border-bottom: 1px solid #232329; padding: 6px 12px; gap: 8px; }
+              .nav-input-wrapper { flex: 1; display: flex; background: #0b0b0c; border: 1px solid #232329; border-radius: 4px; padding: 4px 8px; }
+              .nav-input { flex: 1; background: transparent; border: none; outline: none; color: #ededf0; font-family: monospace; font-size: 12px; }
+              .nav-btn { background: #ededf0; border: none; color: #0b0b0c; padding: 4px 12px; font-size: 11px; font-weight: bold; border-radius: 4px; cursor: pointer; }
+              
+              /* コンテンツ領域 */
+              .view-container { width: 100%; height: calc(100% - 73px); position: relative; }
+              .view-panel { width: 100%; height: 100%; display: none; }
+              .view-panel.active { display: block; }
+              iframe { width: 100%; height: 100%; border: none; background: white; }
+            </style>
+          </head>
+          <body>
+            <div class="tab-bar" id="tabBar">
+              <button class="add-tab-btn" onclick="addNewTab('https://duckduckgo.com')">+</button>
+            </div>
+            
+            <div class="nav-bar">
+              <div class="nav-input-wrapper">
+                <input type="text" id="navInput" class="nav-input" placeholder="URLを入力、またはキーワード検索..." autocomplete="off">
+              </div>
+              <button class="nav-btn" onclick="handleNavSubmit()">Go</button>
+            </div>
 
-    // Scroll to frame
-    setTimeout(() => wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-  }
+            <div class="view-container" id="viewContainer"></div>
 
-  function quick(url) {
-    document.getElementById('urlInput').value = url;
-    navigate();
-  }
+            <script>
+              const PREFIX = '${PREFIX}';
+              let tabs = [];
+              let activeTabId = null;
 
-  function closeFrame() {
-    document.getElementById('frameWrapper').style.display = 'none';
-    document.getElementById('proxyFrame').src = 'about:blank';
-    setStatus('', '準備完了');
+              function encodeUrl(url) {
+                try {
+                  const encoded = encodeURIComponent(url);
+                  return btoa(encoded).replace(/\\+/g, '-').replace(/\\//g, '_').replace(/=+$/, '');
+                } catch(e) { return ''; }
+              }
+
+              function isURL(str) {
+                if (/^https?:\\/\\//.test(str)) return true;
+                const pattern = /^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}(:\\d+)?(\\/.*)?$/i;
+                return pattern.test(str);
+              }
+
+              function resolveUrl(input) {
+                let url = input.trim();
+                if (!url) return '';
+                if (!isURL(url)) {
+                  return 'https://duckduckgo.com/?q=' + encodeURIComponent(input);
+                }
+                if (!/^https?:\\/\\//.test(url)) {
+                  url = 'https://' + url;
+                }
+                return url;
+              }
+
+              function renderTabs() {
+                const tabBar = document.getElementById('tabBar');
+                // 既存のタブ要素を削除（プラスボタンを残す）
+                const existingTabs = tabBar.querySelectorAll('.tab');
+                existingTabs.forEach(t => t.remove());
+
+                tabs.forEach(tab => {
+                  const tabEl = document.createElement('div');
+                  tabEl.className = 'tab' + (tab.id === activeTabId ? ' active' : '');
+                  tabEl.onclick = () => switchTab(tab.id);
+
+                  const titleEl = document.createElement('span');
+                  titleEl.className = 'tab-title';
+                  titleEl.textContent = tab.url;
+
+                  const closeEl = document.createElement('span');
+                  closeEl.className = 'tab-close';
+                  closeEl.textContent = '×';
+                  closeEl.onclick = (e) => {
+                    e.stopPropagation();
+                    closeTab(tab.id);
+                  };
+
+                  tabEl.appendChild(titleEl);
+                  tabEl.appendChild(closeEl);
+                  tabBar.insertBefore(tabEl, tabBar.lastElementChild);
+                });
+
+                // アドレスバーの同期
+                const activeTab = tabs.find(t => t.id === activeTabId);
+                if (activeTab) {
+                  document.getElementById('navInput').value = activeTab.url;
+                }
+              }
+
+              function addNewTab(targetUrl) {
+                const url = resolveUrl(targetUrl);
+                if (!url) return;
+
+                const id = Date.now() + Math.random().toString(36).substr(2, 9);
+                const proxied = PREFIX + encodeUrl(url);
+
+                const panel = document.createElement('div');
+                panel.className = 'view-panel';
+                panel.id = 'panel-' + id;
+                
+                const frame = document.createElement('iframe');
+                frame.src = proxied;
+                frame.setAttribute('referrerpolicy', 'no-referrer');
+                panel.appendChild(frame);
+                document.getElementById('viewContainer').appendChild(panel);
+
+                tabs.push({ id, url, proxied });
+                switchTab(id);
+              }
+
+              function switchTab(id) {
+                activeTabId = id;
+                
+                // 全パネル非表示
+                document.querySelectorAll('.view-panel').forEach(p => p.className = 'view-panel');
+                
+                // 対象パネル表示
+                const targetPanel = document.getElementById('panel-' + id);
+                if (targetPanel) targetPanel.className = 'view-panel active';
+
+                renderTabs();
+              }
+
+              function closeTab(id) {
+                tabs = tabs.filter(t => {
+                  if (t.id === id) {
+                    const el = document.getElementById('panel-' + id);
+                    if (el) el.remove();
+                    return false;
+                  }
+                  return true;
+                });
+
+                if (activeTabId === id && tabs.length > 0) {
+                  switchTab(tabs[tabs.length - 1].id);
+                } else if (tabs.length === 0) {
+                  window.close();
+                } else {
+                  renderTabs();
+                }
+              }
+
+              function handleNavSubmit() {
+                const input = document.getElementById('navInput').value;
+                const url = resolveUrl(input);
+                if (!url) return;
+
+                const activeTab = tabs.find(t => t.id === activeTabId);
+                if (activeTab) {
+                  activeTab.url = url;
+                  activeTab.proxied = PREFIX + encodeUrl(url);
+                  const panel = document.getElementById('panel-' + activeTabId);
+                  if (panel) {
+                    const iframe = panel.querySelector('iframe');
+                    if (iframe) iframe.src = activeTab.proxied;
+                  }
+                  renderTabs();
+                }
+              }
+
+              document.getElementById('navInput').addEventListener('keydown', e => {
+                if (e.key === 'Enter') handleNavSubmit();
+              });
+
+              // 初期タブ生成
+              addNewTab(\`${url}\`);
+            <\/script>
+          </body>
+          </html>
+        `);
+        win.document.close();
+      } else {
+        setStatus('err', 'ポップアップがブロックされました ✗');
+      }
+    } catch(e) {
+      setStatus('err', '読み込みエラー ✗');
+    }
   }
 
   document.getElementById('urlInput').addEventListener('keydown', e => {
