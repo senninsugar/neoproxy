@@ -5,18 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NeoProxy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b0b0c;
-      --surface: #131316;
-      --surface2: #1c1c21;
-      --border: #232329;
-      --border2: #2e2e38;
-      --accent: #ffffff;
-      --text: #ededf0;
-      --muted: #707080;
-      --muted2: #484854;
+      --bg: #0b0b0f;
+      --surface: #12121a;
+      --surface2: #1a1a26;
+      --border: #1f1f2e;
+      --border2: #2d2d42;
+      --accent: #7c3aed;
+      --accent-glow: rgba(124,58,237,0.25);
+      --accent2: #06b6d4;
+      --text: #f3f4f6;
+      --muted: #6b7280;
+      --muted2: #4b5563;
       --success: #10b981;
       --error: #f43f5e;
     }
@@ -26,47 +28,117 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
     }
 
     .container {
-      max-width: 600px;
+      max-width: 900px;
       width: 100%;
+      margin: 0 auto;
       padding: 0 24px;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
-    .title-label {
-      font-size: 2rem;
+    /* ===== HEADER ===== */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 32px 0 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      font-size: 20px;
+    }
+
+    .logo-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.25rem;
       font-weight: 700;
       letter-spacing: -0.5px;
-      color: var(--text);
-      margin-bottom: 24px;
+    }
+
+    .header-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+
+    /* ===== MAIN AREA ===== */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 60px 0;
+    }
+
+    .hero {
+      margin-bottom: 40px;
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .hero-title .line2 {
+      color: var(--accent2);
+    }
+
+    .hero-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
     }
 
     /* ===== SEARCH PANEL ===== */
     .search-panel {
       width: 100%;
-      margin-bottom: 12px;
+      margin-bottom: 32px;
     }
 
     .search-wrapper {
       display: flex;
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 99px;
+      border: 1px solid var(--border2);
+      border-radius: 10px;
       overflow: hidden;
-      transition: border-color 0.2s;
-      padding: 4px;
+      transition: all 0.2s;
     }
 
     .search-wrapper:focus-within {
-      border-color: var(--muted);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .search-protocol {
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      background: var(--surface2);
+      border-right: 1px solid var(--border2);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--muted);
+      user-select: none;
     }
 
     #urlInput {
@@ -75,9 +147,9 @@
       border: none;
       outline: none;
       color: var(--text);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
-      padding: 12px 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.95rem;
+      padding: 16px;
       min-width: 0;
     }
 
@@ -86,29 +158,27 @@
     #goBtn {
       background: var(--accent);
       border: none;
-      color: var(--bg);
-      padding: 0 28px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      font-size: 0.85rem;
+      color: white;
+      padding: 0 24px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
       cursor: pointer;
-      transition: opacity 0.2s;
-      border-radius: 99px;
+      transition: background 0.2s;
     }
 
     #goBtn:hover {
-      opacity: 0.9;
+      background: #6d28d9;
     }
 
     /* Status bar */
     .status-bar {
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
       margin-top: 12px;
       height: 20px;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
     }
 
@@ -116,38 +186,200 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--muted2);
-      transition: background 0.3s;
+      background: var(--border2);
     }
 
-    .status-text { color: var(--muted); transition: color 0.3s; }
+    .status-text { color: var(--muted); }
 
-    .status-bar.loading .status-dot { background: var(--text); animation: pulse 1s infinite; }
-    .status-bar.loading .status-text { color: var(--text); }
+    .status-bar.loading .status-dot { background: var(--accent2); animation: pulse 1s infinite; }
+    .status-bar.loading .status-text { color: var(--accent2); }
     .status-bar.ok .status-dot { background: var(--success); }
     .status-bar.ok .status-text { color: var(--success); }
     .status-bar.err .status-dot { background: var(--error); }
     .status-bar.err .status-text { color: var(--error); }
 
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* ===== SHORTCUTS ===== */
+    .shortcuts-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .shortcuts {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .shortcut {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .shortcut:hover {
+      border-color: var(--muted2);
+      background: var(--surface2);
+    }
+
+    .shortcut-icon { font-size: 14px; }
+
+    /* ===== PROXY FRAME ===== */
+    .frame-wrapper {
+      display: none;
+      width: 100%;
+      margin-top: 40px;
+      flex-direction: column;
+    }
+
+    .frame-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      padding: 12px 16px;
+    }
+
+    .frame-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .frame-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .frame-dot.close { background: #ff5f57; }
+    .frame-dot.min { background: #ffbd2e; }
+    .frame-dot.max { background: #28c840; }
+
+    .frame-url-display {
+      flex: 1;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #proxyFrame {
+      width: 100%;
+      height: 70vh;
+      border: 1px solid var(--border2);
+      border-radius: 0 0 8px 8px;
+      background: white;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 32px 0;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted2);
+      border-top: 1px solid var(--border);
+    }
   </style>
 </head>
 <body>
 <div class="container">
 
-  <div class="title-label">sasutyproxy</div>
-
-  <div class="search-panel">
-    <div class="search-wrapper">
-      <input id="urlInput" type="text" placeholder="URLを入力、またはキーワード検索..." autocomplete="off" spellcheck="false">
-      <button id="goBtn" onclick="navigate()">検索</button>
+  <header>
+    <div class="logo-group">
+      <div class="logo-icon">🌐</div>
+      <div class="logo-text">NeoProxy</div>
     </div>
-    <div class="status-bar" id="statusBar">
-      <div class="status-dot"></div>
-      <span class="status-text" id="statusText"></span>
-    </div>
-  </div>
+    <div class="header-badge">SW · URL-REWRITE · v1.0</div>
+  </header>
 
+  <main>
+    <div class="hero">
+      <div class="hero-title">
+        <span class="line1">Browse</span>
+        <span class="line2">Unrestricted</span>
+      </div>
+      <div class="hero-sub">ULTRAVIOLET-CLASS · URL REWRITING ENGINE</div>
+    </div>
+
+    <div class="search-panel">
+      <div class="search-wrapper">
+        <div class="search-protocol">https://</div>
+        <input id="urlInput" type="text" placeholder="example.com を入力..." autocomplete="off" spellcheck="false">
+        <button id="goBtn" onclick="navigate()">→ GO</button>
+      </div>
+      <div class="status-bar" id="statusBar">
+        <div class="status-dot"></div>
+        <span class="status-text" id="statusText">準備完了</span>
+      </div>
+    </div>
+
+    <div class="shortcuts-label">Quick Access</div>
+    <div class="shortcuts">
+      <div class="shortcut" onclick="quick('https://www.google.com')">
+        <span class="shortcut-icon">🔍</span> Google
+      </div>
+      <div class="shortcut" onclick="quick('https://www.wikipedia.org')">
+        <span class="shortcut-icon">📖</span> Wikipedia
+      </div>
+      <div class="shortcut" onclick="quick('https://www.reddit.com')">
+        <span class="shortcut-icon">💬</span> Reddit
+      </div>
+      <div class="shortcut" onclick="quick('https://news.ycombinator.com')">
+        <span class="shortcut-icon">🗞️</span> Hacker News
+      </div>
+      <div class="shortcut" onclick="quick('https://github.com')">
+        <span class="shortcut-icon">🐙</span> GitHub
+      </div>
+      <div class="shortcut" onclick="quick('https://www.youtube.com')">
+        <span class="shortcut-icon">▶️</span> YouTube
+      </div>
+      <div class="shortcut" onclick="quick('https://developer.mozilla.org')">
+        <span class="shortcut-icon">📘</span> MDN
+      </div>
+      <div class="shortcut" onclick="quick('https://www.duckduckgo.com')">
+        <span class="shortcut-icon">🦆</span> DuckDuckGo
+      </div>
+    </div>
+
+    <div class="frame-wrapper" id="frameWrapper">
+      <div class="frame-toolbar">
+        <div class="frame-dots">
+          <div class="frame-dot close" onclick="closeFrame()"></div>
+          <div class="frame-dot min"></div>
+          <div class="frame-dot max"></div>
+        </div>
+        <div class="frame-url-display" id="frameURL">about:blank</div>
+      </div>
+      <iframe id="proxyFrame"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-top-navigation-by-user-activation"
+        referrerpolicy="no-referrer"
+      ></iframe>
+    </div>
+  </main>
+
+  <footer>NEOPROXY · ULTRAVIOLET-CLASS ARCHITECTURE</footer>
 </div>
 
 <script>
@@ -167,234 +399,40 @@
     document.getElementById('statusText').textContent = text;
   }
 
-  // URL判定パターン
-  function isURL(str) {
-    if (/^https?:\/\//.test(str)) return true;
-    const pattern = /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}(:\d+)?(\/.*)?$/i;
-    return pattern.test(str);
-  }
-
   function navigate() {
-    let input = document.getElementById('urlInput').value.trim();
-    if (!input) return;
-
-    let url = input;
-    if (!isURL(url)) {
-      url = 'https://duckduckgo.com/?q=' + encodeURIComponent(input);
-    } else {
-      if (!/^https?:\/\//.test(url)) {
-        url = 'https://' + url;
-      }
-    }
+    let url = document.getElementById('urlInput').value.trim();
+    if (!url) return;
+    if (!/^https?:\/\//.test(url)) url = 'https://' + url;
 
     const encoded = encode(url);
     if (!encoded) return setStatus('err', 'URLエンコードエラー');
 
     const proxied = PREFIX + encoded;
+    const frame = document.getElementById('proxyFrame');
+    const wrapper = document.getElementById('frameWrapper');
+    const frameURL = document.getElementById('frameURL');
+
+    wrapper.style.display = 'flex';
+    frameURL.textContent = url;
     setStatus('loading', '接続中...');
 
-    try {
-      const win = window.open('about:blank', '_blank');
-      if (win) {
-        setStatus('ok', '新しいタブで開きました ✓');
-        
-        win.document.write(`
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <title>sasutyproxy Viewer</title>
-            <style>
-              body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #0b0b0c; font-family: sans-serif; color: #ededf0; }
-              
-              /* タブバー構造 */
-              .tab-bar { display: flex; align-items: center; background: #131316; border-bottom: 1px solid #232329; padding: 4px 8px 0 8px; gap: 4px; overflow-x: auto; }
-              .tab { display: flex; align-items: center; background: #1c1c21; border: 1px solid #232329; border-bottom: none; padding: 6px 12px; font-size: 12px; border-radius: 6px 6px 0 0; cursor: pointer; max-width: 150px; position: relative; }
-              .tab.active { background: #232329; color: #fff; font-weight: bold; }
-              .tab-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 16px; }
-              .tab-close { position: absolute; right: 6px; cursor: pointer; color: #707080; font-weight: normal; }
-              .tab-close:hover { color: #f43f5e; }
-              .add-tab-btn { background: none; border: none; color: #ededf0; font-size: 16px; cursor: pointer; padding: 4px 8px; margin-bottom: 4px; }
-              
-              /* アドレスバー構造 */
-              .nav-bar { display: flex; align-items: center; background: #131316; border-bottom: 1px solid #232329; padding: 6px 12px; gap: 8px; }
-              .nav-input-wrapper { flex: 1; display: flex; background: #0b0b0c; border: 1px solid #232329; border-radius: 4px; padding: 4px 8px; }
-              .nav-input { flex: 1; background: transparent; border: none; outline: none; color: #ededf0; font-family: monospace; font-size: 12px; }
-              .nav-btn { background: #ededf0; border: none; color: #0b0b0c; padding: 4px 12px; font-size: 11px; font-weight: bold; border-radius: 4px; cursor: pointer; }
-              
-              /* コンテンツ領域 */
-              .view-container { width: 100%; height: calc(100% - 73px); position: relative; }
-              .view-panel { width: 100%; height: 100%; display: none; }
-              .view-panel.active { display: block; }
-              iframe { width: 100%; height: 100%; border: none; background: white; }
-            </style>
-          </head>
-          <body>
-            <div class="tab-bar" id="tabBar">
-              <button class="add-tab-btn" onclick="addNewTab('https://duckduckgo.com')">+</button>
-            </div>
-            
-            <div class="nav-bar">
-              <div class="nav-input-wrapper">
-                <input type="text" id="navInput" class="nav-input" placeholder="URLを入力、またはキーワード検索..." autocomplete="off">
-              </div>
-              <button class="nav-btn" onclick="handleNavSubmit()">Go</button>
-            </div>
+    frame.onload = () => setStatus('ok', '読み込み完了 ✓');
+    frame.onerror = () => setStatus('err', '読み込みエラー ✗');
+    frame.src = proxied;
 
-            <div class="view-container" id="viewContainer"></div>
+    // Scroll to frame
+    setTimeout(() => wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
 
-            <script>
-              const PREFIX = '${PREFIX}';
-              let tabs = [];
-              let activeTabId = null;
+  function quick(url) {
+    document.getElementById('urlInput').value = url;
+    navigate();
+  }
 
-              function encodeUrl(url) {
-                try {
-                  const encoded = encodeURIComponent(url);
-                  return btoa(encoded).replace(/\\+/g, '-').replace(/\\//g, '_').replace(/=+$/, '');
-                } catch(e) { return ''; }
-              }
-
-              function isURL(str) {
-                if (/^https?:\\/\\//.test(str)) return true;
-                const pattern = /^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}(:\\d+)?(\\/.*)?$/i;
-                return pattern.test(str);
-              }
-
-              function resolveUrl(input) {
-                let url = input.trim();
-                if (!url) return '';
-                if (!isURL(url)) {
-                  return 'https://duckduckgo.com/?q=' + encodeURIComponent(input);
-                }
-                if (!/^https?:\\/\\//.test(url)) {
-                  url = 'https://' + url;
-                }
-                return url;
-              }
-
-              function renderTabs() {
-                const tabBar = document.getElementById('tabBar');
-                // 既存のタブ要素を削除（プラスボタンを残す）
-                const existingTabs = tabBar.querySelectorAll('.tab');
-                existingTabs.forEach(t => t.remove());
-
-                tabs.forEach(tab => {
-                  const tabEl = document.createElement('div');
-                  tabEl.className = 'tab' + (tab.id === activeTabId ? ' active' : '');
-                  tabEl.onclick = () => switchTab(tab.id);
-
-                  const titleEl = document.createElement('span');
-                  titleEl.className = 'tab-title';
-                  titleEl.textContent = tab.url;
-
-                  const closeEl = document.createElement('span');
-                  closeEl.className = 'tab-close';
-                  closeEl.textContent = '×';
-                  closeEl.onclick = (e) => {
-                    e.stopPropagation();
-                    closeTab(tab.id);
-                  };
-
-                  tabEl.appendChild(titleEl);
-                  tabEl.appendChild(closeEl);
-                  tabBar.insertBefore(tabEl, tabBar.lastElementChild);
-                });
-
-                // アドレスバーの同期
-                const activeTab = tabs.find(t => t.id === activeTabId);
-                if (activeTab) {
-                  document.getElementById('navInput').value = activeTab.url;
-                }
-              }
-
-              function addNewTab(targetUrl) {
-                const url = resolveUrl(targetUrl);
-                if (!url) return;
-
-                const id = Date.now() + Math.random().toString(36).substr(2, 9);
-                const proxied = PREFIX + encodeUrl(url);
-
-                const panel = document.createElement('div');
-                panel.className = 'view-panel';
-                panel.id = 'panel-' + id;
-                
-                const frame = document.createElement('iframe');
-                frame.src = proxied;
-                frame.setAttribute('referrerpolicy', 'no-referrer');
-                panel.appendChild(frame);
-                document.getElementById('viewContainer').appendChild(panel);
-
-                tabs.push({ id, url, proxied });
-                switchTab(id);
-              }
-
-              function switchTab(id) {
-                activeTabId = id;
-                
-                // 全パネル非表示
-                document.querySelectorAll('.view-panel').forEach(p => p.className = 'view-panel');
-                
-                // 対象パネル表示
-                const targetPanel = document.getElementById('panel-' + id);
-                if (targetPanel) targetPanel.className = 'view-panel active';
-
-                renderTabs();
-              }
-
-              function closeTab(id) {
-                tabs = tabs.filter(t => {
-                  if (t.id === id) {
-                    const el = document.getElementById('panel-' + id);
-                    if (el) el.remove();
-                    return false;
-                  }
-                  return true;
-                });
-
-                if (activeTabId === id && tabs.length > 0) {
-                  switchTab(tabs[tabs.length - 1].id);
-                } else if (tabs.length === 0) {
-                  window.close();
-                } else {
-                  renderTabs();
-                }
-              }
-
-              function handleNavSubmit() {
-                const input = document.getElementById('navInput').value;
-                const url = resolveUrl(input);
-                if (!url) return;
-
-                const activeTab = tabs.find(t => t.id === activeTabId);
-                if (activeTab) {
-                  activeTab.url = url;
-                  activeTab.proxied = PREFIX + encodeUrl(url);
-                  const panel = document.getElementById('panel-' + activeTabId);
-                  if (panel) {
-                    const iframe = panel.querySelector('iframe');
-                    if (iframe) iframe.src = activeTab.proxied;
-                  }
-                  renderTabs();
-                }
-              }
-
-              document.getElementById('navInput').addEventListener('keydown', e => {
-                if (e.key === 'Enter') handleNavSubmit();
-              });
-
-              // 初期タブ生成
-              addNewTab(\`${url}\`);
-            <\/script>
-          </body>
-          </html>
-        `);
-        win.document.close();
-      } else {
-        setStatus('err', 'ポップアップがブロックされました ✗');
-      }
-    } catch(e) {
-      setStatus('err', '読み込みエラー ✗');
-    }
+  function closeFrame() {
+    document.getElementById('frameWrapper').style.display = 'none';
+    document.getElementById('proxyFrame').src = 'about:blank';
+    setStatus('', '準備完了');
   }
 
   document.getElementById('urlInput').addEventListener('keydown', e => {
